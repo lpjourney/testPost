@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Facebook Share Dialog Example</title>
+</head>
+<body>
+  <button onclick="shareImage()">Share Image on Facebook</button>
+
+  <script>
+    function shareImage() {
+      FB.ui({
+        method: 'share',
+        href: 'https://image-art.dmc.tv/uploads/535_copy_5de0c8d757.jpg', // URL ของรูปภาพที่ต้องการแชร์
+        quote: 'นี่คือลงภาพทดสอบจาก Facebook Sharing Dialog'
+      }, function(response) {
+        if (response && !response.error_message) {
+          alert('Posting completed.');
+        } else {
+          alert('Error while posting.');
+        }
+      });
+    }
+
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : 'YOUR_APP_ID', // ใส่ App ID ของ Facebook
+        cookie     : true,
+        xfbml      : true,
+        version    : 'v12.0' // ใช้เวอร์ชันล่าสุดของ Facebook SDK
+      });
+    };
+
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+</body>
+</html>
